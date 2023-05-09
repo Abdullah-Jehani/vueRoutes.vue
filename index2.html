@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html , body {
+            height: 100% ; 
+        }
+        body {
+            display: grid; 
+            place-items: center;
+        }
+        .text-red {
+            color: red;
+        }
+        .text-green {
+            color: green;
+        }
+    </style>
+    <div id="app"> 
+      <button :class="active ? 'text-red' : 'text-green'"  
+       @click ="toggle">Click Me</button>  <!--   v-bind used to bind auttributes like class with result of expression {buttonClasses} , we say if its active then turn it to red else green --> </div>
+        <!--its like you say bind me with result of the class , and the result of the class is in the auttributes-->  
+    
+    <script>
+      const { createApp } = Vue // create an vue app instance
+    
+      createApp({
+        data() {
+          return {
+           active : false 
+          }
+        } , 
+        methods: {
+            toggle() {
+                // this.buttonClasses = this.buttonClasses === 'text-green' ? 'text-red' : 'text-green' ; 
+                this.active = !this.active ; // we make the opposite of the state 
+            }
+        }
+      
+      }).mount('#app')
+    </script>
+</body>
+</html>

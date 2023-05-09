@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class=" h-full grid place-items-center"> <!--h-full is like you saying height = 100%-->
+    <div id="app">
+
+<section v-show="incompleteAssignments.length">
+    <h2 class="font-bold mb-2">In Progress</h2>
+    <ul>
+        <!-- ooping through a list  -->
+        <li v-for="assignment in incompleteAssignments" 
+            :key="assignment.id">    <!-- when it not comlete it will be adden to the list -->
+            <!-- key is so important when it comes to loops it help vue to know exactly where you are   -->
+            <label>
+                {{ assignment.name}}
+                <input type="checkbox" v-model="assignment.complete"> <!--in this way when we set it done it will be true -->
+                <!-- v-model => when we just want to listen to certian thing , v-bind used when we bind attributes with expression or certian result  -->
+            </label>
+            </li>
+        
+    </ul>
+</section>
+<section v-show="completedAssignments.length" class="mt-8"> <!--it says => show me the complete list if we have items that have been filtered true -->
+    <h2  class="font-bold mb-2"  >Completed</h2>
+    <ul>
+        <!-- ooping through a list  -->
+        <li v-for="assignment in completedAssignments" :key="assignment.id">
+            <label>
+                {{ assignment.name}}
+                <input type="checkbox" v-model="assignment.complete"> <!--in this way when we set it done it will be true -->
+                <!-- v-model => when we just want to listen to certian thing , v-bind used when we bind attributes with expression or certian result  -->
+            </label>
+            </li>
+        
+    </ul>
+</section>
+
+
+    </div>
+    <script>
+        let app = {
+            data () {
+                return {
+                    assignments: [
+                        {name: 'Finish Project' , complete: false , id:1 } , 
+                        {name: 'Finish chapter 4' , complete: false , id:2 } ,  
+                        {name: 'Finish Assigment' , complete: false , id:3 }  
+
+                    ]
+                }
+            } , 
+            computed: { // computed properties are like methods but they are cached , they are not re-evaluated unless their dependencies change
+                completedAssignments() {
+                    return this.assignments.filter(a=>a.complete === true) ; 
+                } , 
+                incompleteAssignments() {
+                    return this.assignments.filter(a=>a.complete === false) ; 
+                }
+            }
+        }
+        
+            Vue.createApp(app).mount('#app') ; 
+    </script>
+    
+</body>
+</html>
