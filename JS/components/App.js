@@ -1,8 +1,11 @@
-import AppButton from "./AppButton.js ";
+// import AppButton from "./AppButton.js ";
+import assignments  from "./assignments.js"
 export default {
-    // in here we can define new comonents ;
-    components : {
-        'app-button': AppButton
-  
-    } 
-} ; 
+  components: {assignments} ,
+
+template: `
+    <assignments></assignments>
+
+
+` ,
+}
